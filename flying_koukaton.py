@@ -21,19 +21,22 @@ def main():
             if event.type == pg.QUIT: return
 
         x = tmr % 3200
-        screen.blit(bg_img, [-x, 0])
-        screen.blit(bg_img2, [-x+1600, 0])
-        screen.blit(bg_img, [-x+3200, 0])
-        screen.blit(kk_img, kk_rct)
+        screen.blit(bg_img, [-x, 0]) #1枚目
+        screen.blit(bg_img2, [-x+1600, 0]) #2枚目
+        screen.blit(bg_img, [-x+3200, 0]) #3枚目
+        screen.blit(kk_img, kk_rct) #こうかとん表示
         kk_lst = pg.key.get_pressed() #キーの押下状態の取得
-        if kk_lst[pg.K_UP]:
-            kk_rct.move_ip((0, -1))
-        if kk_lst[pg.K_DOWN]:
-            kk_rct.move_ip((0, 1))
-        if kk_lst[pg.K_LEFT]:
-            kk_rct.move_ip((-1, 0))
-        if kk_lst[pg.K_RIGHT]:
-            kk_rct.move_ip((1, 0))
+        
+        x = -1 
+        y = 0
+        if kk_lst[pg.K_UP]: #上移動
+            y = -1
+        if kk_lst[pg.K_DOWN]: #下移動
+            y = 1
+        if kk_lst[pg.K_RIGHT]: #右移動
+            x = 1
+            y = 0
+        kk_rct.move_ip((x, y))
         
         pg.display.update()
         tmr += 1        
